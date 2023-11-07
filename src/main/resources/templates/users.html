@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table of Users</title>
+</head>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+<h2>Table of User</h2>
+<br>
+<div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each = "list : ${users}">
+            <td th:utext="${list.getId()}">...</td>
+            <td th:utext="${list.getName()}">...</td>
+            <td th:utext="${list.getSurname()}">...</td>
+            <td th:utext="${list.getAge()}">...</td>
+            <td>
+                <form action="#" th:action="@{/{id}/edit(id=${list.getId()})}" method="patch">
+                    <button type="submit">
+                        <i>Update</i>
+                    </button>
+                </form>
+            </td>
+
+            <td>
+                <form action="#" th:action="@{/{id}/delete(id=${list.getId()})}" method="DELETE">
+                    <button type="submit">
+                        <i>Delete</i>
+                    </button>
+                </form>
+            </td>
+
+
+<!--            <td><input type="hidden" th:value="@{/users/{id}(id=${list.getId()})}" name="deviceIP"/><button type="submit" name="upd" value="update">Update</button></td>-->
+
+
+        </tr>
+    </table>
+
+    <br>
+
+    <form method="GET" action="/new-user">
+        <button type="submit">Add user</button>
+    </form>
+
+</div>
+</body>
+</html>
